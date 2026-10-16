@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: almuradi-soft-erp
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements-prod.txt
+    startCommand: gunicorn app:app --workers 2 --bind 0.0.0.0:$PORT --timeout 120
+    healthCheckPath: /health
+    disk:
+      name: almuradi-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: DATABASE_PATH
+        value: /var/data/almuradi.db
+      - key: APP_SECRET_KEY
+        generateValue: true
+      - key: SESSION_COOKIE_SECURE
+        value: "1"
+      - key: INITIAL_ADMIN_PASSWORD
+        generateValue: true

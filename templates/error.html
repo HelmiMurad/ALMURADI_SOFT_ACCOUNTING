@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block title %}خطأ {{code}}{% endblock %}{% block heading %}حدث خطأ{% endblock %}{% block content %}<div class="panel error-panel"><div class="eyebrow">ERROR {{code}}</div><h1>{{code}}</h1><p>{{message}}</p><a class="btn primary" href="{{url_for('dashboard')}}">العودة إلى لوحة التحكم</a></div>{% endblock %}
